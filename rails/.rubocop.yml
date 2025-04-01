@@ -9,6 +9,10 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.4
 
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+    - "config/initializers/inflections.rb"
+
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"

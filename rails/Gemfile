@@ -3,15 +3,10 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', require: false
-gem 'kamal', require: false
 gem 'pg'
 gem 'puma'
 gem 'rack-cors'
 gem 'rails'
-gem 'solid_cable'
-gem 'solid_cache'
-gem 'solid_queue'
-gem 'thruster', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do

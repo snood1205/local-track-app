@@ -12,5 +12,11 @@ FactoryBot.define do
       region { 'New Any' }
       postal_code { 'ANY123' }
     end
+
+    trait :minimal do
+      street_line2 { nil }
+      region { nil }
+      postal_code { nil }
+    end
   end
 end

@@ -55,4 +55,9 @@ RSpec.describe Track do
       it { expect(described_class.count).to eq(2) }
     end
   end
+
+  describe 'associations' do
+    it { is_expected.to have_one(:address).dependent(:destroy) }
+    it { is_expected.to have_many(:vendors).dependent(:destroy) }
+  end
 end

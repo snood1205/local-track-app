@@ -3,9 +3,7 @@ require "fileutils"
 
 APP_ROOT = File.expand_path("..", __dir__)
 
-def system!(*args)
-  system(*args, exception: true)
-end
+def system!(*args) = system(*args, exception: true)
 
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.

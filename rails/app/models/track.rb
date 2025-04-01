@@ -6,8 +6,7 @@ class Track < ApplicationRecord
   validates :length, numericality: { greater_than: 0 }
   validates :length_unit, inclusion: { in: %w[mi km yd ft m] }
   has_one :address, dependent: :destroy
+  has_many :vendors, dependent: :destroy
 
-  def human_readable_length
-    "#{length} #{length_unit}"
-  end
+  def human_readable_length = "#{length} #{length_unit}"
 end

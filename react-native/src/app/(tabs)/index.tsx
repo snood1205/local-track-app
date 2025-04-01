@@ -6,3 +6,5 @@ const Home: FC = () => (
     <Text>Home</Text>
   </View>
 );
+
+export default Home;

@@ -5,14 +5,10 @@ class TracksController < ApplicationController
 
   def info
     render json: {
-      track: {
-        name: @track.name,
-        length: @track.length,
-        length_unit: @track.length_unit,
-        human_readable_length: "#{@track.length} #{@track.length_unit}",
-        material: @track.material,
-        address: @track.address.as_json
-      }
+      track: @track.as_json(only: %i[name length length_unit material],
+                            methods: %i[human_readable_length],
+                            include: { address: { only: %i[street_line1 street_line2 city
+                                                           region postal_code country] } })
     }
   end
 

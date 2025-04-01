@@ -14,8 +14,6 @@ RSpec.describe Track do
         new_track.valid?
       end
 
-      after { described_class.destroy_all }
-
       let(:new_track) { build(:track) }
 
       it { expect(new_track).not_to be_valid }
@@ -28,6 +26,7 @@ RSpec.describe Track do
       before { negative_length.valid? }
 
       it { expect(negative_length).not_to be_valid }
+
       it { expect(negative_length.errors[:length]).to include('must be greater than 0') }
     end
 
@@ -43,6 +42,29 @@ RSpec.describe Track do
         let(:valid_unit) { build(:track, length_unit: unit) }
         it { expect(valid_unit).to be_valid }
       end
+    end
+  end
+
+  describe 'allows multiple tracks to be created' do
+    let(:clay_track) { build(:track) }
+    let(:asphalt_track) { build(:track, name: 'Other Track', length: 0.5, length_unit: 'mi', material: 'Asphalt') }
+
+    it 'does not raise an error when saving multiple tracks' do
+      expect do
+        clay_track.save!
+        asphalt_track.save!
+      end.not_to raise_error
+    end
+
+    context 'when trying to save multiple tracks' do
+      before do
+        clay_track.save!
+        asphalt_track.save!
+      end
+
+      it { expect(clay_track).to be_valid }
+      it { expect(asphalt_track).to be_valid }
+      it { expect(described_class.count).to eq(2) }
     end
   end
 end

@@ -33,3 +33,6 @@
 
 # Code coverage
 /coverage/
+
+# Persisted examples
+spec/examples.txt

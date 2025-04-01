@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Validations
   extend ActiveSupport::Concern
 
   def validate_single_row_table
-    if self.class.count > 0 && self.class.first.id != id
-      errors.add(:base, 'Only one row is allowed in this table.')
-      throw(:abort)
-    end
+    return unless self.class.count.positive? && self.class.first.id != id
+
+    errors.add(:base, I18n.t('errors.only_one_row'))
+    throw(:abort)
   end
 end

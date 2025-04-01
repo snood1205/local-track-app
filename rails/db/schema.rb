@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_31_144929) do
     t.bigint "track_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["track_id"], name: "index_addresses_on_track_id"
+    t.index ["track_id"], name: "index_addresses_on_track_id", unique: true
   end
 
   create_table "tracks", force: :cascade do |t|

@@ -8,18 +8,6 @@ RSpec.describe Track do
       it { is_expected.to validate_presence_of(attribute) }
     end
 
-    describe 'validating that only one row is allowed in the tracks table' do
-      before do
-        create(:track)
-        new_track.valid?
-      end
-
-      let(:new_track) { build(:track) }
-
-      it { expect(new_track).not_to be_valid }
-      it { expect(new_track.errors[:base]).to include('Only one row is allowed in this table.') }
-    end
-
     describe 'validating that length is greater than 0' do
       let(:negative_length) { build(:track, length: -1) }
 

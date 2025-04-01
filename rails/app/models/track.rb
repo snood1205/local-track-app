@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Holds basic information about a track and has a one-to-one relationship with its address.
 class Track < ApplicationRecord
   validates :name, :length, :length_unit, :material, presence: true
   validates :length, numericality: { greater_than: 0 }

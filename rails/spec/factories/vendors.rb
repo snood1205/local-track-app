@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :vendor do
     name { 'Sample vendor' }
-    slug { 'sample-vendor' }
+    sequence(:slug) { |n| "vendor-slug-#{n}" }
     category { 'Food and drink' }
     track { association(:track) }
   end

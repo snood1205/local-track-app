@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 const Buy: FC = () => {
   const globalParams = useGlobalSearchParams();
   const slug = globalParams.item as string;
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buy Item</Text>

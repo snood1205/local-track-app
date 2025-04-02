@@ -5,7 +5,7 @@ FactoryBot.define do
     name { 'Corn on the cob' }
     price_in_cents { 100 }
     heading { 'Food' }
-    slug { 'corn-on-the-cob' }
+    sequence(:slug) { |n| "corn-on-the-cob#{n}" }
     description { 'Fresh cooked corn on the cob with butter' }
     vendor { association(:vendor) }
 
@@ -13,7 +13,7 @@ FactoryBot.define do
       name { 'Pizza' }
       price_in_cents { 375 }
       heading { 'Food' }
-      slug { 'pizza' }
+      sequence(:slug) { |n| "pizza#{n}" }
       description { 'Delicious cheese pizza' }
     end
 
@@ -21,7 +21,7 @@ FactoryBot.define do
       name { 'Popcorn' }
       price_in_cents { 500 }
       heading { 'Snacks' }
-      slug { 'popcorn' }
+      sequence(:slug) { |n| "popcorn#{n}" }
       description { 'Hot fresh popcorn' }
     end
 
@@ -29,7 +29,7 @@ FactoryBot.define do
       name { 'Soda' }
       price_in_cents { 200 }
       heading { 'Beverages' }
-      slug { 'soda' }
+      sequence(:slug) { |n| "soda#{n}" }
       description { 'Refreshing soda' }
     end
 
@@ -37,7 +37,7 @@ FactoryBot.define do
       name { 'Water' }
       price_in_cents { 100 }
       heading { 'Beverages' }
-      slug { 'water' }
+      sequence(:slug) { |n| "water#{n}" }
       description { 'Ice cold water' }
     end
 
@@ -45,7 +45,7 @@ FactoryBot.define do
       name { 'Sunscreen' }
       price_in_cents { 1500 }
       heading { 'Accessories' }
-      slug { 'sunscreen' }
+      sequence(:slug) { |n| "sunscreen#{n}" }
       description { 'SPF 50 sunscreen' }
     end
   end

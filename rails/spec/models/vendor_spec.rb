@@ -41,7 +41,7 @@ RSpec.describe Vendor do
 
     context 'when the menu has items without headings' do
       let!(:pizza) { create(:menu_item, :pizza, vendor:, heading: nil) }
-      let!(:popcorn) { create(:menu_item, :popcorn, heading: nil) }
+      let!(:popcorn) { create(:menu_item, :popcorn, vendor:, heading: nil) }
 
       it 'returns the menu items grouped by heading' do
         expect(vendor.menu).to eq({ '*' => [pizza.to_h, popcorn.to_h] })
@@ -116,7 +116,7 @@ RSpec.describe Vendor do
       let!(:water) { create(:menu_item, :water, vendor:, heading: 'Beverages') }
       let!(:pizza) { create(:menu_item, :pizza, vendor:, heading: 'Food') }
       let!(:popcorn) { create(:menu_item, :popcorn, vendor:, heading: 'Food') }
-      let!(:sunscreen) { create(:menu_item, :suncreen, vendor:, heading: nil) }
+      let!(:sunscreen) { create(:menu_item, :sunscreen, vendor:, heading: nil) }
 
       it 'returns the menu items grouped by heading' do
         expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h, water.to_h],
@@ -130,7 +130,7 @@ RSpec.describe Vendor do
       let!(:water) { create(:menu_item, :water, vendor:, heading: 'Beverages') }
       let!(:pizza) { create(:menu_item, :pizza, vendor:, heading: 'Food') }
       let!(:popcorn) { create(:menu_item, :popcorn, vendor:, heading: 'Food') }
-      let!(:sunscreen) { create(:menu_item, :suncreen, vendor:, heading: nil) }
+      let!(:sunscreen) { create(:menu_item, :sunscreen, vendor:, heading: nil) }
       let!(:ear_plugs) { create(:menu_item, vendor:, heading: nil, name: 'Ear plugs', slug: 'ear-plugs') }
 
       it 'returns the menu items grouped by heading' do

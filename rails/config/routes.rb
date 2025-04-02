@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   resources :vendors, only: %i[index] do
     get 'grouped', on: :collection
+    get 'grouped/include-menu', on: :collection, to: 'vendors#grouped_with_menu'
   end
 end

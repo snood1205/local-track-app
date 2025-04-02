@@ -13,6 +13,9 @@ Lint/AmbiguousRegexpLiteral:
   Exclude:
     - "config/initializers/inflections.rb"
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"

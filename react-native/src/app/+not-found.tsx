@@ -7,7 +7,7 @@ const NotFoundScreen: FC = () => (
     <Stack.Screen options={{ title: "404 - Not Found" }} />
     <View style={styles.container}>
       <Text style={styles.message}>
-        I see you were trying to find the Z Main. Unfortunately, that's not
+        I see you were trying to find the Z Main. Unfortunately, that&apos;s not
         running today.
       </Text>
       <Link href="/" style={styles.link}>

@@ -20,6 +20,9 @@ Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 

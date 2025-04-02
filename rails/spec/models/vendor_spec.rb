@@ -125,7 +125,7 @@ RSpec.describe Vendor do
       end
     end
 
-    context 'when there are multiple headings with multiple items and multiple items without a heading' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    context 'when there are multiple headings with multiple items and multiple items without a heading' do
       let!(:soda) { create(:menu_item, vendor:, heading: 'Beverages', name: 'Soda') }
       let!(:water) { create(:menu_item, vendor:, heading: 'Beverages', name: 'Water') }
       let!(:pizza) { create(:menu_item, vendor:, heading: 'Food', name: 'Pizza') }

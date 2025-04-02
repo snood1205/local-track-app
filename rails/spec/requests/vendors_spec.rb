@@ -57,12 +57,12 @@ RSpec.describe 'Vendors' do
   end
 
   describe 'GET /vendors/grouped/include-menu' do
-    let!(:water) { create(:menu_item, heading: 'Drinks', name: 'Water', vendor: beverage_vendor) }
-    let!(:soda) { create(:menu_item,  heading: 'Drinks', name: 'Soda', vendor: beverage_vendor) }
-    let!(:juice) { create(:menu_item,  heading: 'Drinks', name: 'Juice', vendor: beverage_vendor) }
-    let!(:burger) { create(:menu_item, heading: 'Sandwiches', name: 'Burger', vendor: food_vendor) }
-    let!(:fries) { create(:menu_item, heading: 'Snacks', name: 'Fries', vendor: food_vendor) }
-    let!(:tshirt) { create(:menu_item, name: 'T-shirt', vendor: merch_vendor) }
+    let!(:water) { create(:menu_item, heading: 'Drinks', slug: 'water', name: 'Water', vendor: beverage_vendor) }
+    let!(:soda) { create(:menu_item,  heading: 'Drinks', slug: 'soda', name: 'Soda', vendor: beverage_vendor) }
+    let!(:juice) { create(:menu_item,  heading: 'Drinks', slug: 'juice', name: 'Juice', vendor: beverage_vendor) }
+    let!(:burger) { create(:menu_item, heading: 'Sandwiches', slug: 'burger', name: 'Burger', vendor: food_vendor) }
+    let!(:fries) { create(:menu_item, heading: 'Snacks', slug: 'fries', name: 'Fries', vendor: food_vendor) }
+    let!(:tshirt) { create(:menu_item, name: 'T-shirt', slug: 't-shirt', vendor: merch_vendor) }
     let(:parsed_beverage_vendor) { response.parsed_body[beverage_vendor.category][0] }
     let(:parsed_food_vendor) { response.parsed_body[food_vendor.category][1] }
     let(:parsed_merch_vendor) { response.parsed_body[merch_vendor.category][0] }

@@ -7,6 +7,17 @@ RSpec.describe MenuItem do
     it { is_expected.to belong_to(:vendor) }
   end
 
+  describe 'validations' do
+    before { described_class.skip_callback(:create, :after, :set_slug) }
+    after { described_class.set_callback(:create, :after, :set_slug) }
+
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:slug) }
+    it { is_expected.to validate_uniqueness_of(:slug).case_insensitive }
+    it { is_expected.to validate_presence_of(:price_in_cents) }
+    it { is_expected.to validate_numericality_of(:price_in_cents).only_integer.is_greater_than_or_equal_to(0) }
+  end
+
   describe '#price' do
     let(:menu_item) { build(:menu_item, price_in_cents: 1234) }
 

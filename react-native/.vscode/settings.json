@@ -1,3 +1,20 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.sortImports": "always",
+      "source.organizeImports": "always",
+      "source.addMissingImports.ts": "always",
+      "source.removeUnusedImports": "always"
+    }
+  },
+  "[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.sortImports": "always",
+      "source.organizeImports": "always",
+      "source.addMissingImports.ts": "always",
+      "source.removeUnusedImports": "always"
+    }
+  }
 }

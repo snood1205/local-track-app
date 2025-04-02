@@ -1,15 +1,17 @@
+import { md5key } from "@/src/lib/md5-key";
 import { VendorWithMenu } from "@/src/models";
+
+import { Link } from "expo-router";
+import { camelize, capitalize } from "inflection";
 import { FC, Fragment, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   ListRenderItem,
+  StyleSheet,
   Text,
   View,
-  StyleSheet,
 } from "react-native";
-import { capitalize } from "inflection";
-import { md5key } from "@/src/lib/md5-key";
 
 const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
   return (
@@ -41,12 +43,16 @@ const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
               )}
               {vendor.menu[heading].map((menuItem) => (
                 <Fragment key={md5key(menuItem, "menu-item-fragment")}>
-                  <Text
+                  <Link
+                    href={{
+                      pathname: "/vendors/buy",
+                      params: { item: camelize(menuItem.name) },
+                    }}
                     key={md5key(menuItem, "menu-item-name")}
                     style={styles.menuItemName}
                   >
                     {menuItem.name}
-                  </Text>
+                  </Link>
                   <Text
                     key={md5key(menuItem, "menu-item-price")}
                     style={styles.menuItemPrice}

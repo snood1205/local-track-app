@@ -7,6 +7,15 @@ RSpec.describe Vendor do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:slug) }
+    it { is_expected.to validate_uniqueness_of(:slug).case_insensitive }
+    it { is_expected.to validate_length_of(:slug).is_at_most(28) }
+    it { is_expected.to allow_value('valid-slug').for(:slug) }
+    it { is_expected.not_to allow_value('invalid slug').for(:slug) }
+    it { is_expected.not_to allow_value('INVALID-SLUG').for(:slug) }
+    it { is_expected.not_to allow_value('invalid_slug').for(:slug) }
+    it { is_expected.not_to allow_value('invalid-slug!').for(:slug) }
+    it { is_expected.not_to allow_value('inval!d-slug').for(:slug) }
   end
 
   describe 'associations' do

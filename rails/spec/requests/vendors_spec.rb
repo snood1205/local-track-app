@@ -38,14 +38,15 @@ RSpec.describe 'Vendors' do
     it { expect(response.parsed_body['Food & Drinks'].size).to eq(2) }
 
     it { expect(response.parsed_body['Food & Drinks'][0]['name']).to eq(beverage_vendor.name) }
+    it { expect(response.parsed_body['Food & Drinks'][0]['slug']).to eq(beverage_vendor.slug) }
     it { expect(response.parsed_body['Food & Drinks'][0]).not_to have_key('id') }
-    it { expect(response.parsed_body['Food & Drinks'][1]['name']).to eq(food_vendor.name) }
+    it { expect(response.parsed_body['Food & Drinks'][1]['slug']).to eq(food_vendor.slug) }
     it { expect(response.parsed_body['Food & Drinks'][1]).not_to have_key('id') }
 
     it { expect(response.parsed_body['Clothing']).to be_a(Array) }
     it { expect(response.parsed_body['Clothing'].size).to eq(1) }
     it { expect(response.parsed_body['Clothing'][0]).not_to have_key('id') }
-    it { expect(response.parsed_body['Clothing'][0]['name']).to eq(merch_vendor.name) }
+    it { expect(response.parsed_body['Clothing'][0]['slug']).to eq(merch_vendor.slug) }
 
     it { expect(response.parsed_body['Food & Drinks'][0]).not_to have_key('category') }
     it { expect(response.parsed_body['Food & Drinks'][0]).not_to have_key('trackId') }

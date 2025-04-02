@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Vendors' do
-  let!(:beverage_vendor) { create(:vendor, name: 'Beverage Vendor', category: 'Food & Drinks') }
-  let!(:food_vendor) { create(:vendor, name: 'Food Vendor', category: 'Food & Drinks') }
-  let!(:merch_vendor) { create(:vendor, name: 'Merch Vendor', category: 'Clothing') }
+  let!(:beverage_vendor) { create(:vendor, name: 'Drink stand', slug: 'drink-stand', category: 'Food & Drinks') }
+  let!(:food_vendor) { create(:vendor, name: 'Food Vendor', slug: 'food-vendor', category: 'Food & Drinks') }
+  let!(:merch_vendor) { create(:vendor, name: 'Merch Vendor', slug: 'merch-vendor', category: 'Clothing') }
 
   describe 'GET /index' do
     before { get '/vendors' }

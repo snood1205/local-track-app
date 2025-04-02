@@ -6,6 +6,9 @@ RSpec.describe Vendor do
   subject(:vendor) { create(:vendor) }
 
   describe 'validations' do
+    before { described_class.skip_callback(:validation, :before, :generate_slug) }
+    after { described_class.set_callback(:validation, :before, :generate_slug) }
+
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:slug) }
     it { is_expected.to validate_uniqueness_of(:slug).case_insensitive }

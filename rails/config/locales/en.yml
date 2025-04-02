@@ -1,3 +1,4 @@
 en:
   errors:
     only_one_row: "Only one row is allowed in this table."
+  currency: "$"

@@ -3,11 +3,20 @@
 FactoryBot.define do
   factory :address do
     street_line1 { '123 Main St' }
-    street_line2 { 'Apt A' }
     city { 'Anytown' }
-    region { 'New Any' }
-    postal_code { 'ANY123' }
     country { 'Anywhere' }
     track { association(:track) }
+
+    trait :full do
+      street_line2 { 'Apt 1A' }
+      region { 'New Any' }
+      postal_code { 'ANY123' }
+    end
+
+    trait :minimal do
+      street_line2 { nil }
+      region { nil }
+      postal_code { nil }
+    end
   end
 end

@@ -1,5 +1,6 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
+# Information about a track's address.
 class Address < ApplicationRecord
   belongs_to :track
 
@@ -12,4 +13,19 @@ class Address < ApplicationRecord
       methods: :track_id
     )
   end
+
+  def to_s
+    ''.tap do |address|
+      address << street_line1
+      address << present_or_newline(street_line2)
+      address << city
+      address << present_or_newline(region)
+      address << "#{postal_code}\n" if postal_code.present?
+      address << country
+    end
+  end
+
+  private
+
+  def present_or_newline(value) = value.present? ? ", #{value}\n" : "\n"
 end

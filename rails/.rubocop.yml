@@ -20,6 +20,10 @@ Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
 
+Metricis/MethodLength:
+  Exclude:
+    - "db/migrate/**/*.rb"
+
 RSpec/ExampleLength:
   Enabled: false # With RSpec/MultipleExpectations already on, this does more harm than good
 

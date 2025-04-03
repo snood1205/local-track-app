@@ -1,8 +1,9 @@
+import { fetchWithLoading } from "@/src/lib/fetch-with-loading";
 import { md5key } from "@/src/lib/md5-key";
 import { VendorWithMenu } from "@/src/models";
 
 import { Link } from "expo-router";
-import { camelize, capitalize } from "inflection";
+import { capitalize } from "inflection";
 import { FC, Fragment, useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -46,7 +47,7 @@ const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
                   <Link
                     href={{
                       pathname: "/vendors/buy",
-                      params: { item: camelize(menuItem.name) },
+                      params: { item: menuItem.slug },
                     }}
                     key={md5key(menuItem, "menu-item-name")}
                     style={styles.menuItemName}
@@ -78,13 +79,11 @@ const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
 const Vendors: FC = () => {
   const [isLoading, setLoading] = useState(true);
   const [vendors, setVendors] = useState<Record<string, VendorWithMenu[]>>();
-  const fetchVendors = async () => {
-    const url = `${process.env.EXPO_PUBLIC_API_URL}/vendors/grouped/include-menu`;
-    const response = await fetch(url);
-    const json = await response.json();
-    setVendors(json);
-    setLoading(false);
-  };
+  const fetchVendors = fetchWithLoading(
+    "/vendors/grouped/include-menu",
+    setVendors,
+    setLoading,
+  );
 
   useEffect(() => {
     fetchVendors();

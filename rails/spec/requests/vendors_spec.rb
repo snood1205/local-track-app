@@ -85,21 +85,27 @@ RSpec.describe 'Vendors' do
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]).to be_a(Hash) }
 
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['name']).to eq(water.name) }
+    it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['slug']).to eq(water.slug) }
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['description']).to eq(water.description) }
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['price']).to eq(water.price) }
     it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['name']).to eq(soda.name) }
+    it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['slug']).to eq(soda.slug) }
     it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['description']).to eq(soda.description) }
     it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['price']).to eq(soda.price) }
     it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['name']).to eq(juice.name) }
+    it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['slug']).to eq(juice.slug) }
     it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['description']).to eq(juice.description) }
     it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['price']).to eq(juice.price) }
     it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['name']).to eq(burger.name) }
+    it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['slug']).to eq(burger.slug) }
     it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['description']).to eq(burger.description) }
     it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['price']).to eq(burger.price) }
     it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['name']).to eq(fries.name) }
+    it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['slug']).to eq(fries.slug) }
     it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['description']).to eq(fries.description) }
     it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['price']).to eq(fries.price) }
     it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['name']).to eq(tshirt.name) }
+    it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['slug']).to eq(tshirt.slug) }
     it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['description']).to eq(tshirt.description) }
     it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['price']).to eq(tshirt.price) }
 

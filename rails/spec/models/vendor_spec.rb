@@ -35,7 +35,8 @@ RSpec.describe Vendor do
       let!(:menu_item) { create(:menu_item, vendor:, heading: nil) }
 
       it 'returns the menu item in the * grouping' do
-        expect(vendor.menu).to eq({ '*' => [menu_item.to_h] })
+        expect(vendor.menu).to eq({ '*' => [{ 'description' => menu_item.description, 'name' => menu_item.name,
+                                              'price' => menu_item.price, 'slug' => menu_item.slug }] })
       end
     end
 
@@ -44,7 +45,10 @@ RSpec.describe Vendor do
       let!(:popcorn) { create(:menu_item, :popcorn, vendor:, heading: nil) }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ '*' => [pizza.to_h, popcorn.to_h] })
+        expect(vendor.menu).to eq({ '*' => [
+                                    { 'description' => pizza.description, 'name' => pizza.name, 'price' => pizza.price,
+                                      'slug' => pizza.slug }, { 'description' => popcorn.description, 'name' => popcorn.name, 'price' => popcorn.price, 'slug' => popcorn.slug }
+                                  ] })
       end
     end
 
@@ -52,7 +56,8 @@ RSpec.describe Vendor do
       let!(:soda) { create(:menu_item, :soda, vendor:, heading: 'Beverages') }
 
       it 'returns the menu item in the correct heading grouping' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h] })
+        expect(vendor.menu).to eq({ 'Beverages' => [{ 'description' => soda.description, 'name' => soda.name, 'price' => soda.price,
+                                                      'slug' => soda.slug }] })
       end
 
       it 'does not include the * grouping as there are no items without headings' do
@@ -65,7 +70,10 @@ RSpec.describe Vendor do
       let!(:water) { create(:menu_item, :water, vendor:, heading: 'Beverages') }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h, water.to_h] })
+        expect(vendor.menu).to eq({ 'Beverages' => [
+                                    { 'description' => soda.description, 'name' => soda.name, 'price' => soda.price,
+                                      'slug' => soda.slug }, { 'description' => water.description, 'name' => water.name, 'price' => water.price, 'slug' => water.slug }
+                                  ] })
       end
 
       it 'does not include the * grouping as there are no items without headings' do
@@ -78,7 +86,10 @@ RSpec.describe Vendor do
       let!(:pizza) { create(:menu_item, :pizza, vendor:, heading: 'Food') }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h], 'Food' => [pizza.to_h] })
+        expect(vendor.menu).to eq({
+                                    'Beverages' => [{ 'description' => soda.description, 'name' => soda.name, 'price' => soda.price,
+                                                      'slug' => soda.slug }], 'Food' => [{ 'description' => pizza.description, 'name' => pizza.name, 'price' => pizza.price, 'slug' => pizza.slug }]
+                                  })
       end
 
       it 'does not include the * grouping as there are no items without headings' do
@@ -93,7 +104,11 @@ RSpec.describe Vendor do
       let!(:popcorn) { create(:menu_item, :popcorn, vendor:, heading: 'Food') }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h, water.to_h], 'Food' => [pizza.to_h, popcorn.to_h] })
+        expect(vendor.menu).to eq({
+                                    'Beverages' => [{ 'description' => soda.description, 'name' => soda.name, 'price' => soda.price, 'slug' => soda.slug },
+                                                    { 'description' => water.description, 'name' => water.name, 'price' => water.price,
+                                                      'slug' => water.slug }], 'Food' => [{ 'description' => pizza.description, 'name' => pizza.name, 'price' => pizza.price, 'slug' => pizza.slug }, { 'description' => popcorn.description, 'name' => popcorn.name, 'price' => popcorn.price, 'slug' => popcorn.slug }]
+                                  })
       end
 
       it 'does not include the * grouping as there are no items without headings' do
@@ -107,7 +122,10 @@ RSpec.describe Vendor do
       let!(:sunscreen) { create(:menu_item, :sunscreen, vendor:, heading: nil) }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h], 'Food' => [pizza.to_h], '*' => [sunscreen.to_h] })
+        expect(vendor.menu).to eq({
+                                    'Beverages' => [{ 'description' => soda.description, 'name' => soda.name, 'price' => soda.price,
+                                                      'slug' => soda.slug }], 'Food' => [{ 'description' => pizza.description, 'name' => pizza.name, 'price' => pizza.price, 'slug' => pizza.slug }], '*' => [{ 'description' => sunscreen.description, 'name' => sunscreen.name, 'price' => sunscreen.price, 'slug' => sunscreen.slug }]
+                                  })
       end
     end
 
@@ -119,9 +137,13 @@ RSpec.describe Vendor do
       let!(:sunscreen) { create(:menu_item, :sunscreen, vendor:, heading: nil) }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h, water.to_h],
-                                    'Food' => [pizza.to_h, popcorn.to_h],
-                                    '*' => [sunscreen.to_h] })
+        expect(vendor.menu).to eq({ 'Beverages' => [{ 'description' => soda.description, 'name' => soda.name, 'price' => soda.price, 'slug' => soda.slug }, { 'description' => water.description, 'name' => water.name, 'price' => water.price, 'slug' => water.slug }],
+                                    'Food' => [
+                                      { 'description' => pizza.description, 'name' => pizza.name, 'price' => pizza.price,
+                                        'slug' => pizza.slug }, { 'description' => popcorn.description, 'name' => popcorn.name, 'price' => popcorn.price, 'slug' => popcorn.slug }
+                                    ],
+                                    '*' => [{ 'description' => sunscreen.description, 'name' => sunscreen.name,
+                                              'price' => sunscreen.price, 'slug' => sunscreen.slug }] })
       end
     end
 
@@ -134,9 +156,24 @@ RSpec.describe Vendor do
       let!(:ear_plugs) { create(:menu_item, vendor:, heading: nil, name: 'Ear plugs', slug: 'ear-plugs') }
 
       it 'returns the menu items grouped by heading' do
-        expect(vendor.menu).to eq({ 'Beverages' => [soda.to_h, water.to_h],
-                                    'Food' => [pizza.to_h, popcorn.to_h],
-                                    '*' => [sunscreen.to_h, ear_plugs.to_h] })
+        expect(vendor.menu).to eq(
+          { 'Beverages' => [
+              { 'description' => soda.description, 'name' => soda.name, 'price' => soda.price, 'slug' => soda.slug },
+              { 'description' => water.description, 'name' => water.name, 'price' => water.price, 'slug' => water.slug }
+            ],
+            'Food' => [
+              { 'description' => pizza.description, 'name' => pizza.name, 'price' => pizza.price,
+                'slug' => pizza.slug },
+              { 'description' => popcorn.description, 'name' => popcorn.name, 'price' => popcorn.price,
+                'slug' => popcorn.slug }
+            ],
+            '*' => [
+              { 'description' => sunscreen.description, 'name' => sunscreen.name, 'price' => sunscreen.price,
+                'slug' => sunscreen.slug },
+              { 'description' => ear_plugs.description, 'name' => ear_plugs.name, 'price' => ear_plugs.price,
+                'slug' => ear_plugs.slug }
+            ] }
+        )
       end
     end
   end

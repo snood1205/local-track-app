@@ -15,7 +15,10 @@ module Sluggable
     if name.nil?
       errors.add(:name, 'Name cannot be nil')
     elsif slug.blank?
-      self.slug = "#{name.parameterize}-#{SecureRandom.hex(4)}"
+      slug_base = name.parameterize
+      random_suffix_hex_size = (28 - slug_base.length - 1) / 2
+      random_suffix = SecureRandom.hex(random_suffix_hex_size)
+      self.slug = "#{slug_base}-#{random_suffix}"
     end
   end
 end

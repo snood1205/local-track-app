@@ -8,6 +8,12 @@ class Payment < ApplicationRecord
   validates :transaction_code, presence: true
   validates :total_in_cents, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  def valid_to_process?
+    valid? # call to run all validations
+
+    errors.count == 1 && errors.first.attribute == :transaction_code && errors.first.type == :blank
+  end
+
   private
 
   def menu_item_belongs_to_vendor

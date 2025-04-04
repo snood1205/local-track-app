@@ -20,7 +20,7 @@ Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
 
-Metricis/MethodLength:
+Metrics/MethodLength:
   Exclude:
     - "db/migrate/**/*.rb"
 

@@ -72,6 +72,22 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    apimatic_core (0.3.13)
+      apimatic_core_interfaces (~> 0.2.0)
+      certifi (~> 2018.1, >= 2018.01.18)
+      faraday-multipart (~> 1.0)
+      nokogiri (~> 1.13, >= 1.13.10)
+    apimatic_core_interfaces (0.2.1)
+    apimatic_faraday_client_adapter (0.1.4)
+      apimatic_core_interfaces (~> 0.2.0)
+      certifi (~> 2018.1, >= 2018.01.18)
+      faraday (~> 2.0, >= 2.0.1)
+      faraday-follow_redirects (~> 0.2)
+      faraday-gzip (~> 1.0)
+      faraday-http-cache (~> 2.2)
+      faraday-multipart (~> 1.0)
+      faraday-net_http_persistent (~> 2.0)
+      faraday-retry (~> 2.0)
     ast (2.4.3)
     base64 (0.2.0)
     benchmark (0.4.0)
@@ -81,6 +97,7 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
+    certifi (2018.01.18)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     crass (1.0.6)
@@ -90,6 +107,7 @@ GEM
       reline (>= 0.3.8)
     diff-lcs (1.6.1)
     docile (1.4.1)
+    dotenv (3.1.7)
     drb (2.2.1)
     erubi (1.13.1)
     factory_bot (6.5.1)
@@ -97,6 +115,26 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
+    faraday (2.12.2)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
+    faraday-gzip (1.0.0)
+      faraday (>= 1.0)
+      zlib (~> 2.1)
+    faraday-http-cache (2.5.1)
+      faraday (>= 0.8)
+    faraday-multipart (1.1.0)
+      multipart-post (~> 2.0)
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
+    faraday-net_http_persistent (2.3.0)
+      faraday (~> 2.5)
+      net-http-persistent (>= 4.0.4, < 5)
+    faraday-retry (2.3.1)
+      faraday (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -122,6 +160,11 @@ GEM
     mini_mime (1.1.5)
     minitest (5.25.5)
     msgpack (1.8.0)
+    multipart-post (2.4.1)
+    net-http (0.6.0)
+      uri
+    net-http-persistent (4.0.5)
+      connection_pool (~> 2.2)
     net-imap (0.5.6)
       date
       net-protocol
@@ -268,6 +311,10 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
+    square.rb (42.0.0.20250319)
+      apimatic_core (~> 0.3.11)
+      apimatic_core_interfaces (~> 0.2.1)
+      apimatic_faraday_client_adapter (~> 0.1.4)
     stringio (3.1.6)
     thor (1.3.2)
     timeout (0.4.3)
@@ -283,6 +330,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.7.2)
+    zlib (2.1.1)
 
 PLATFORMS
   aarch64-linux
@@ -299,6 +347,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  dotenv
   factory_bot_rails
   pg
   puma
@@ -313,6 +362,7 @@ DEPENDENCIES
   rubocop-rspec_rails
   shoulda-matchers
   simplecov
+  square.rb
   tzinfo-data
 
 BUNDLED WITH

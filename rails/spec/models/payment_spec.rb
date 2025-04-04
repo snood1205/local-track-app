@@ -33,4 +33,51 @@ RSpec.describe Payment do
 
     it { expect(valid_payment).to be_valid }
   end
+
+  describe '#valid_to_process?' do
+    let(:vendor) { create(:vendor) }
+    let(:menu_item) { create(:menu_item, vendor:) }
+
+    context 'when transaction_code is blank but all else is there' do
+      subject { build(:payment, transaction_code: nil, total_in_cents: 100, vendor:, menu_item:) }
+
+      it { is_expected.to be_valid_to_process }
+    end
+
+    context 'when transaction_code is present with everything else' do
+      subject { build(:payment, transaction_code: '12345', total_in_cents: 100, vendor:, menu_item:) }
+
+      it { is_expected.not_to be_valid_to_process }
+    end
+
+    context 'when there is a blank transaction_code but no vendor' do
+      subject { build(:payment, transaction_code: nil, total_in_cents: 100, vendor: nil, menu_item:) }
+
+      it { is_expected.not_to be_valid_to_process }
+    end
+
+    context 'when there is a blank transaction_code but no total_in_cents' do
+      subject { build(:payment, transaction_code: nil, total_in_cents: nil, vendor:, menu_item:) }
+
+      it { is_expected.not_to be_valid_to_process }
+    end
+
+    context 'when there is a blank transaction_code but no vendor and total_in_cents' do
+      subject { build(:payment, transaction_code: nil, total_in_cents: nil, vendor: nil, menu_item:) }
+
+      it { is_expected.not_to be_valid_to_process }
+    end
+
+    context 'when all attributes are blank' do
+      subject { build(:payment, transaction_code: nil, total_in_cents: nil, vendor: nil, menu_item: nil) }
+
+      it { is_expected.not_to be_valid_to_process }
+    end
+
+    context 'when there are other validation errors' do
+      subject { build(:payment, transaction_code: nil, total_in_cents: -1, vendor:, menu_item:) }
+
+      it { is_expected.not_to be_valid_to_process }
+    end
+  end
 end

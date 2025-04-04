@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     get 'grouped', on: :collection
     get 'grouped/include-menu', on: :collection, to: 'vendors#grouped_with_menu'
   end
+
+  resources :menu_items, only: %i[show], path: 'items'
 end

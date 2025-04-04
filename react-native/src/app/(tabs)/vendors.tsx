@@ -1,15 +1,18 @@
+import { fetchWithLoading } from "@/src/lib/fetch-with-loading";
+import { md5key } from "@/src/lib/md5-key";
 import { VendorWithMenu } from "@/src/models";
+
+import { Link } from "expo-router";
+import { capitalize } from "inflection";
 import { FC, Fragment, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   ListRenderItem,
+  StyleSheet,
   Text,
   View,
-  StyleSheet,
 } from "react-native";
-import { capitalize } from "inflection";
-import { md5key } from "@/src/lib/md5-key";
 
 const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
   return (
@@ -41,12 +44,16 @@ const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
               )}
               {vendor.menu[heading].map((menuItem) => (
                 <Fragment key={md5key(menuItem, "menu-item-fragment")}>
-                  <Text
+                  <Link
+                    href={{
+                      pathname: "/vendors/buy",
+                      params: { item: menuItem.slug },
+                    }}
                     key={md5key(menuItem, "menu-item-name")}
                     style={styles.menuItemName}
                   >
                     {menuItem.name}
-                  </Text>
+                  </Link>
                   <Text
                     key={md5key(menuItem, "menu-item-price")}
                     style={styles.menuItemPrice}
@@ -72,13 +79,11 @@ const renderItem: ListRenderItem<[string, VendorWithMenu[]]> = ({ item }) => {
 const Vendors: FC = () => {
   const [isLoading, setLoading] = useState(true);
   const [vendors, setVendors] = useState<Record<string, VendorWithMenu[]>>();
-  const fetchVendors = async () => {
-    const url = `${process.env.EXPO_PUBLIC_API_URL}/vendors/grouped/include-menu`;
-    const response = await fetch(url);
-    const json = await response.json();
-    setVendors(json);
-    setLoading(false);
-  };
+  const fetchVendors = fetchWithLoading(
+    "/vendors/grouped/include-menu",
+    setVendors,
+    setLoading,
+  );
 
   useEffect(() => {
     fetchVendors();

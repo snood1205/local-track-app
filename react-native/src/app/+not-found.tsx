@@ -1,6 +1,6 @@
 import { Link, Stack } from "expo-router";
 import { FC } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const NotFoundScreen: FC = () => (
   <>

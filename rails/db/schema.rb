@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_02_140808) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_03_171255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,7 +35,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_02_140808) do
     t.bigint "vendor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug", default: "", null: false
+    t.index ["id", "vendor_id"], name: "unique_menu_item_vendor", unique: true
+    t.index ["slug"], name: "index_menu_items_on_slug", unique: true
     t.index ["vendor_id"], name: "index_menu_items_on_vendor_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "transaction_code", null: false
+    t.bigint "menu_item_id"
+    t.bigint "vendor_id", null: false
+    t.integer "total_in_cents", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_item_id"], name: "index_payments_on_menu_item_id"
+    t.index ["vendor_id"], name: "index_payments_on_vendor_id"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -60,5 +74,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_02_140808) do
 
   add_foreign_key "addresses", "tracks"
   add_foreign_key "menu_items", "vendors"
+  add_foreign_key "payments", "menu_items"
+  add_foreign_key "payments", "menu_items", column: ["menu_item_id", "vendor_id"], primary_key: ["id", "vendor_id"], name: "fk_menu_item_vendor", on_delete: :cascade
+  add_foreign_key "payments", "vendors"
   add_foreign_key "vendors", "tracks"
 end

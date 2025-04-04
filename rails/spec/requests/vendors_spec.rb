@@ -57,12 +57,12 @@ RSpec.describe 'Vendors' do
   end
 
   describe 'GET /vendors/grouped/include-menu' do
-    let!(:water) { create(:menu_item, heading: 'Drinks', name: 'Water', vendor: beverage_vendor) }
-    let!(:soda) { create(:menu_item,  heading: 'Drinks', name: 'Soda', vendor: beverage_vendor) }
-    let!(:juice) { create(:menu_item,  heading: 'Drinks', name: 'Juice', vendor: beverage_vendor) }
-    let!(:burger) { create(:menu_item, heading: 'Sandwiches', name: 'Burger', vendor: food_vendor) }
-    let!(:fries) { create(:menu_item, heading: 'Snacks', name: 'Fries', vendor: food_vendor) }
-    let!(:tshirt) { create(:menu_item, name: 'T-shirt', vendor: merch_vendor) }
+    let!(:water) { create(:menu_item, heading: 'Drinks', slug: 'water', name: 'Water', vendor: beverage_vendor) }
+    let!(:soda) { create(:menu_item,  heading: 'Drinks', slug: 'soda', name: 'Soda', vendor: beverage_vendor) }
+    let!(:juice) { create(:menu_item,  heading: 'Drinks', slug: 'juice', name: 'Juice', vendor: beverage_vendor) }
+    let!(:burger) { create(:menu_item, heading: 'Sandwiches', slug: 'burger', name: 'Burger', vendor: food_vendor) }
+    let!(:fries) { create(:menu_item, heading: 'Snacks', slug: 'fries', name: 'Fries', vendor: food_vendor) }
+    let!(:tshirt) { create(:menu_item, name: 'T-shirt', slug: 't-shirt', vendor: merch_vendor) }
     let(:parsed_beverage_vendor) { response.parsed_body[beverage_vendor.category][0] }
     let(:parsed_food_vendor) { response.parsed_body[food_vendor.category][1] }
     let(:parsed_merch_vendor) { response.parsed_body[merch_vendor.category][0] }
@@ -85,21 +85,27 @@ RSpec.describe 'Vendors' do
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]).to be_a(Hash) }
 
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['name']).to eq(water.name) }
+    it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['slug']).to eq(water.slug) }
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['description']).to eq(water.description) }
     it { expect(parsed_beverage_vendor['menu'][lc[water.heading]][0]['price']).to eq(water.price) }
     it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['name']).to eq(soda.name) }
+    it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['slug']).to eq(soda.slug) }
     it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['description']).to eq(soda.description) }
     it { expect(parsed_beverage_vendor['menu'][lc[soda.heading]][1]['price']).to eq(soda.price) }
     it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['name']).to eq(juice.name) }
+    it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['slug']).to eq(juice.slug) }
     it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['description']).to eq(juice.description) }
     it { expect(parsed_beverage_vendor['menu'][lc[juice.heading]][2]['price']).to eq(juice.price) }
     it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['name']).to eq(burger.name) }
+    it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['slug']).to eq(burger.slug) }
     it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['description']).to eq(burger.description) }
     it { expect(parsed_food_vendor['menu'][lc[burger.heading]][0]['price']).to eq(burger.price) }
     it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['name']).to eq(fries.name) }
+    it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['slug']).to eq(fries.slug) }
     it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['description']).to eq(fries.description) }
     it { expect(parsed_food_vendor['menu'][lc[fries.heading]][0]['price']).to eq(fries.price) }
     it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['name']).to eq(tshirt.name) }
+    it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['slug']).to eq(tshirt.slug) }
     it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['description']).to eq(tshirt.description) }
     it { expect(parsed_merch_vendor['menu'][lc[tshirt.heading]][0]['price']).to eq(tshirt.price) }
 

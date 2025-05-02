@@ -1,12 +1,17 @@
 version: 2
 updates:
 - package-ecosystem: bundler
-  directory: "/"
+  directory: "/rails"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+- package-ecosystem: npm
+  directory: "/react-native"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
 - package-ecosystem: github-actions
-  directory: "/"
+  directory: "/rails"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
